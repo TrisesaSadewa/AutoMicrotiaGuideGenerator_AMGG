@@ -15,14 +15,14 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- CUSTOM CSS (CLEAN CLINICAL THEME - NO BACKGROUND IMAGE) ---
+# --- CUSTOM CSS (CLEAN CLINICAL THEME - NO BLACK CONTAINERS) ---
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         /* MAIN APP BACKGROUND - Solid Light Gray */
         .stApp {
-            background-color: #f3f4f6; /* Neutral Gray 100 */
+            background-color: #f3f4f6;
             color: #111827;
         }
 
@@ -34,7 +34,7 @@ st.markdown("""
         
         /* FORCE SIDEBAR TEXT COLOR */
         section[data-testid="stSidebar"] * {
-            color: #111827 !important; /* Dark Gray 900 */
+            color: #111827 !important;
         }
 
         /* CARDS & CONTAINERS - Pure White with Shadow */
@@ -47,6 +47,27 @@ st.markdown("""
             margin-bottom: 20px;
         }
 
+        /* FORCE FILE UPLOADER TO LIGHT THEME */
+        [data-testid="stFileUploader"] {
+            background-color: #f9fafb;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        [data-testid="stFileUploader"] section {
+            background-color: transparent !important;
+        }
+        [data-testid="stFileUploader"] div, 
+        [data-testid="stFileUploader"] span, 
+        [data-testid="stFileUploader"] small {
+            color: #4b5563 !important; /* Dark Gray text */
+        }
+        [data-testid="stFileUploader"] button {
+            background-color: #ffffff !important;
+            color: #111827 !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+
         /* TYPOGRAPHY */
         h1, h2, h3, h4, h5, h6 {
             color: #111827 !important;
@@ -55,7 +76,7 @@ st.markdown("""
         }
         
         p, li, span, div.stMarkdown {
-            color: #374151 !important; /* Gray 700 */
+            color: #374151 !important;
         }
         
         /* Remove default streamlit padding around text */
@@ -109,6 +130,18 @@ st.markdown("""
             text-align: center;
             font-weight: 600;
             color: #111827;
+        }
+        
+        /* CUSTOM CODE BLOCK STYLE (Replaces default black st.code) */
+        .custom-code-block {
+            background-color: #f8fafc; /* Light Slate Gray */
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: monospace;
+            color: #334155;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -277,4 +310,12 @@ else:
                         )
                     with col_list:
                         st.markdown("**Included Files:**")
-                        st.code("BASE.stl\nHELIX.stl\nANTIHELIX.stl\nREADME.txt")
+                        # Use custom HTML for code block instead of st.code to avoid black container
+                        st.markdown("""
+                        <div class="custom-code-block">
+                        BASE.stl<br>
+                        HELIX.stl<br>
+                        ANTIHELIX.stl<br>
+                        README.txt
+                        </div>
+                        """, unsafe_allow_html=True)
