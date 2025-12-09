@@ -15,78 +15,58 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- CUSTOM CSS (HIGH CONTRAST & READABILITY) ---
+# --- CUSTOM CSS (CLEAN CLINICAL THEME - NO BACKGROUND IMAGE) ---
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-        /* MAIN BACKGROUND - Kept the image but muted heavily */
+        /* MAIN APP BACKGROUND - Solid Light Gray */
         .stApp {
-            background-color: #f8fafc;
-            background-image: url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: #f3f4f6; /* Neutral Gray 100 */
+            color: #111827;
         }
 
-        /* OPAQUE OVERLAY - Ensures background is barely visible to prevent noise */
-        .stApp::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(248, 250, 252, 0.95); /* 95% White Overlay */
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* SIDEBAR - Solid White Background & Dark Text */
+        /* SIDEBAR - Pure White with Border */
         section[data-testid="stSidebar"] {
             background-color: #ffffff !important;
-            border-right: 1px solid #e2e8f0;
-            box-shadow: 1px 0 10px rgba(0,0,0,0.05);
+            border-right: 1px solid #e5e7eb;
         }
         
-        /* Force Sidebar Text Colors */
-        section[data-testid="stSidebar"] .stMarkdown, 
-        section[data-testid="stSidebar"] h1,
-        section[data-testid="stSidebar"] h2,
-        section[data-testid="stSidebar"] h3,
-        section[data-testid="stSidebar"] p,
-        section[data-testid="stSidebar"] label,
-        section[data-testid="stSidebar"] span {
-            color: #0f172a !important; /* Slate 900 */
+        /* FORCE SIDEBAR TEXT COLOR */
+        section[data-testid="stSidebar"] * {
+            color: #111827 !important; /* Dark Gray 900 */
         }
 
-        /* MAIN CONTENT CONTAINERS - Solid White Cards with Shadow */
+        /* CARDS & CONTAINERS - Pure White with Shadow */
         .stContainer, .header-card {
             background-color: #ffffff !important;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
             padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
             margin-bottom: 20px;
-            isolation: isolate; /* Creates a new stacking context */
-            z-index: 1;
         }
 
-        /* GLOBAL TEXT CONTRAST ENFORCEMENT */
+        /* TYPOGRAPHY */
         h1, h2, h3, h4, h5, h6 {
-            color: #000000 !important;
+            color: #111827 !important;
             font-family: 'Inter', sans-serif;
             font-weight: 700 !important;
         }
         
         p, li, span, div.stMarkdown {
-            color: #334155 !important; /* Slate 700 */
-            font-weight: 500;
+            color: #374151 !important; /* Gray 700 */
+        }
+        
+        /* Remove default streamlit padding around text */
+        .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
         }
 
         /* INPUT LABELS */
         .stTextInput > label, .stNumberInput > label, .stCheckbox > label, .stFileUploader > label {
-            color: #0f172a !important;
+            color: #111827 !important;
             font-weight: 600 !important;
         }
 
@@ -98,37 +78,37 @@ st.markdown("""
             padding: 0.6rem 1.2rem;
             border-radius: 6px;
             font-weight: 600;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             width: 100%;
         }
         div.stButton > button:first-child:hover {
             background-color: #1d4ed8;
-            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
         }
 
         /* METRICS */
-        div[data-testid="stMetricLabel"] > label { color: #64748b !important; }
-        div[data-testid="stMetricValue"] { color: #0f172a !important; font-weight: 700 !important; }
+        div[data-testid="stMetricLabel"] > label { color: #6b7280 !important; }
+        div[data-testid="stMetricValue"] { color: #111827 !important; font-weight: 700 !important; }
 
         /* TABS */
         button[data-baseweb="tab"] {
-            color: #64748b !important;
+            color: #6b7280 !important;
             font-weight: 600;
+            background-color: transparent !important;
         }
         button[data-baseweb="tab"][aria-selected="true"] {
             color: #2563EB !important;
-            background-color: rgba(37, 99, 235, 0.1) !important;
+            border-bottom: 2px solid #2563EB !important;
         }
 
         /* STATUS BADGES */
         .status-badge {
             background-color: #ffffff;
             padding: 8px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
             text-align: center;
             font-weight: 600;
-            color: #0f172a;
+            color: #111827;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -212,7 +192,7 @@ st.markdown("""
     <div style="display: flex; align-items: center; gap: 20px;">
         <span style="font-size: 3rem;">🦻</span>
         <div>
-            <h1 style="margin: 0; font-size: 2rem; color: #000;">NagataGuide Pro</h1>
+            <h1 style="margin: 0; font-size: 2rem; color: #111827;">NagataGuide Pro</h1>
             <p style="margin: 5px 0 0 0; color: #4b5563; font-size: 1.1rem;">Automated Microtia Reconstruction Planner</p>
         </div>
     </div>
