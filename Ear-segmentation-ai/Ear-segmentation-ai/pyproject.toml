@@ -1,0 +1,131 @@
+[tool.poetry]
+name = "earsegmentationai"
+version = "2.0.0"
+description = "Pytorch Based - Efficient and Lightweight Ear Segmentation"
+authors = ["Umit KACAR <umitkacar.phd@gmail.com>","Onuralp SEZER <thunderbirdtr@gmail.com>"]
+maintainers = [
+    "Umit KACAR <umitkacar.phd@gmail.com>",
+    "Onuralp SEZER <thunderbirdtr@gmail.com>",
+]
+readme = "README.md"
+packages = [{include = "earsegmentationai", from = "src"}]
+homepage = "https://github.com/umitkacar/Ear-segmentation-ai"
+repository = "https://github.com/umitkacar/Ear-segmentation-ai"
+documentation = "https://github.com/umitkacar/Ear-segmentation-ai/tree/main/docs"
+keywords = ["pytorch","ear","segmentation","ear-segmentation","segmentation_models","ear detection","detection"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: X11 Applications",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: OS Independent",
+]
+
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+poethepoet = "^0.18.1"
+numpy = "^1.24.1"
+pillow = "^10.0.0"
+opencv-python = "^4.6.0.66"
+albumentations = "^1.3.0"
+imgviz = "^1.7.2"
+torch = "^1.13.1"
+torchvision = "^0.14.1"
+segmentation-models-pytorch = "^0.3.2"
+requests = "^2.32.0"
+tqdm = "^4.65.0"
+click = "^8.1.3"
+typer = "^0.7.0"
+colorama = "^0.4.6"
+commonmark = "^0.9.1"
+pygments = "^2.14.0"
+rich = "^13.3.1"
+shellingham = "^1.5.0.post1"
+pydantic = "^2.0.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+mypy = "^0.991"
+bandit = "^1.7.5"
+debugpy = "^1.6.6"
+rope = "^1.7.0"
+wheel = "^0.38.4"
+setuptools = "^75.0.0"
+coverage = "^7.2.2"
+pre-commit = "^3.2.1"
+pyupgrade = "^3.3.1"
+types-requests = "^2.28.11.16"
+ruff = "^0.0.241"
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+pytest-mock = "^3.10.0"
+pytest-asyncio = "^0.20.0"
+
+
+[tool.poe.tasks]
+pytorch_cpu = "pip3 install torch torchvision --extra-index-url https://download.pytorch.org/whl/cpu"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+[tool.isort]
+line_length = 79
+profile = "black"
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.bandit]
+tests = ["B201", "B301"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+ignore = ["E402", "E501"]
+select = ["E", "F", "W"]
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = false
+warn_unused_configs = true
+ignore_missing_imports = true
+no_implicit_optional = false
+disable_error_code = ["assignment", "arg-type", "return-value", "union-attr", "attr-defined", "call-overload", "var-annotated", "valid-type"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+earsegmentationai = "earsegmentationai.cli.app:app"

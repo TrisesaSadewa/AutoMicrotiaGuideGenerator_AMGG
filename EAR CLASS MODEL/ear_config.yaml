@@ -1,0 +1,24 @@
+# YOLOv8 Training Configuration for Ear Detection
+
+# --- Dataset Paths ---
+# CRITICAL: This is the absolute root path to your data.
+# The 'train', 'val', and 'test' paths below are RELATIVE to this root.
+path: C:\Users\Trise\Documents\TRS\ITS\PROJECT\AUTO BONE SUBSTRACT\Code\EAR CLASS MODEL\ear recognition datasets\Dataset1
+
+# Assuming you create subfolders inside Dataset1 for YOLO format:
+# Path to training images (e.g., Dataset1/train/images/)
+train: train data
+# Path to validation images (you will need to split your data for this)
+val: validation data
+# Path to test images (optional, you will need to split your data for this)
+test: test data
+
+# --- Classes ---
+# We are training an EAR DETECTION model (one class: 'ear')
+nc: 1  # Number of classes
+names: ['ear'] 
+
+# --- Training Parameters (Recommended) ---
+# epochs: 50 
+# imgsz: 640 
+# batch: 16 # Adjust based on your GPU

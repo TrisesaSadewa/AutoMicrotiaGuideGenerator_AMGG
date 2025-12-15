@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['ear']
+
+roboflow:
+  workspace: mutyi
+  project: ear-segmentation
+  version: 3
+  license: MIT
+  url: https://universe.roboflow.com/mutyi/ear-segmentation/dataset/3

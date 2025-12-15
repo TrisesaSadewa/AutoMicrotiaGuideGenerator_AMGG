@@ -1,0 +1,6 @@
+Image,Status,Method,Suture_Points,3D_Guide,Mask_Generated
+2D EAR 1,SUCCESS,YOLO+SAM Hybrid (Skeleton Mode),2,YES,YES
+2D EAR 2,SUCCESS,YOLO+SAM Hybrid (Skeleton Mode),2,YES,YES
+2D EAR 3,SUCCESS,YOLO+SAM Hybrid (Skeleton Mode),2,YES,YES
+2D EAR 4,SUCCESS,YOLO+SAM Hybrid (Skeleton Mode),2,YES,YES
+2D EAR 5,SUCCESS,YOLO+SAM Hybrid (Skeleton Mode),2,YES,YES
